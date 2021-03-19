@@ -1,0 +1,45 @@
+.features {
+    grid-column: center-start / center-end;
+
+    margin: 15rem 0;
+
+    @supports(display: grid){//这里只是一个示范，如果对于不支持grid的browser的界面该怎么处理--NO 1
+        display: grid;
+        // grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));//这个feature对于auto response于不同的screen size真的太好用了
+        gap: 6rem;      //'grid-gap' is placed by 'gap'
+        align-items: start;
+    }
+    
+}
+
+.feature {
+
+    float: left;
+    width: 33.3333%;
+    margin-bottom: 6rem; //这部分，结合上面的NO1，同时写上这段代码，实现面对不支持grid的browser的情况
+
+    @supports(display: grid) {//结合上面的NO1，同时写上这段代码，实现面对不支持grid的browser的情况
+        width: auto;
+        margin-bottom: 0;
+    }
+
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    row-gap: 1.5rem;
+    column-gap: 2.5rem;
+
+    &__icon {
+        fill: $color-primary;
+        width: 4.5rem;
+        height: 4.5rem;
+        grid-row: 1 / span 2; // -1 is to extend to the end of explicit row, but here we also have implicit row, so -1 does not work here
+        transform: translateY(-1rem);
+    }
+
+    &__text {
+        font-size: 1.7rem;
+    }
+}
+
+
